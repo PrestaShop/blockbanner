@@ -33,7 +33,7 @@ class BlockBanner extends Module
 	{
 		$this->name = 'blockbanner';
 		$this->tab = 'front_office_features';
-		$this->version = 1.2;
+		$this->version = 1.3;
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
@@ -42,6 +42,7 @@ class BlockBanner extends Module
 
 		$this->displayName = $this->l('Banner block');
 		$this->description = $this->l('Displays a banner at the top of the store.');
+		$this->ps_versions_compliancy = array('min' => '1.5.6.1', 'max' => _PS_VERSION_);
 	}
 
 	public function install()
