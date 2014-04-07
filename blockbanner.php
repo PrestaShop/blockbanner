@@ -190,15 +190,15 @@ class BlockBanner extends Module
 						'type' => 'file_lang',
 						'label' => $this->l('Block image'),
 						'name' => 'BLOCKBANNER_IMG',
-						'desc' => $this->l('You can either upload the image or gives its absolute link in the option below.'),
+						'desc' => $this->l('You can either upload the image file, or enter its absolute link in the "Image link" option below.'),
 						'lang' => true,
 					),
 					array(
 						'type' => 'text',
 						'lang' => true,
-						'label' => $this->l('Image Link'),
+						'label' => $this->l('Image link'),
 						'name' => 'BLOCKBANNER_LINK',
-						'desc' => $this->l('You can either give the image\'s absolute link or upload the image in the option above.')
+						'desc' => $this->l('You can either enter the image\'s absolute link, or upload the image file in the "Block image" option above.')
 					),			
 					array(
 						'type' => 'text',
