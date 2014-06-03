@@ -52,7 +52,8 @@ class BlockBanner extends Module
 			$this->registerHook('displayBanner') && 
 			$this->registerHook('displayHeader') && 
 			$this->registerHook('actionObjectLanguageAddAfter') &&
-			$this->installFixtures();
+			$this->installFixtures() &&
+			$this->disableDevice(Context::DEVICE_MOBILE);
 	}
 	
 	public function hookActionObjectLanguageAddAfter($params)
