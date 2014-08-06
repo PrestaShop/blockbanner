@@ -41,7 +41,7 @@ class BlockBanner extends Module
 		parent::__construct();	
 
 		$this->displayName = $this->l('Banner block');
-		$this->description = $this->l('Displays a banner at the top of the store.');
+		$this->description = $this->l('Displays a banner at the top of the shop.');
 		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 	}
 
@@ -188,7 +188,7 @@ class BlockBanner extends Module
 				'input' => array(
 					array(
 						'type' => 'file_lang',
-						'label' => $this->l('Block image'),
+						'label' => $this->l('Top banner image'),
 						'name' => 'BLOCKBANNER_IMG',
 						'desc' => $this->l('You can either upload the image or gives its absolute link in the option below.'),
 						'lang' => true,
@@ -196,14 +196,14 @@ class BlockBanner extends Module
 					array(
 						'type' => 'text',
 						'lang' => true,
-						'label' => $this->l('Image Link'),
+						'label' => $this->l('Banner Link'),
 						'name' => 'BLOCKBANNER_LINK',
-						'desc' => $this->l('You can either give the image\'s absolute link or upload the image in the option above.')
+						'desc' => $this->l('Enter the link associated to your banner. When clicking on the banner, the link opens in the same window. If no link is entered, it redirects to the homepage.')
 					),			
 					array(
 						'type' => 'text',
 						'lang' => true,
-						'label' => $this->l('Image description'),
+						'label' => $this->l('Banner description'),
 						'name' => 'BLOCKBANNER_DESC',
 						'desc' => $this->l('Please enter a short but meaningful description for the banner.')
 					)
