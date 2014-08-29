@@ -191,7 +191,7 @@ class BlockBanner extends Module
 						'type' => 'file_lang',
 						'label' => $this->l('Top banner image'),
 						'name' => 'BLOCKBANNER_IMG',
-						'desc' => $this->l('You can either upload the image or gives its absolute link in the option below.'),
+						'desc' => $this->l('Upload an image for your top banner. The recommended dimensions are 1170 x 65px if you are using the default theme.'),
 						'lang' => true,
 					),
 					array(
