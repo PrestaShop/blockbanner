@@ -33,12 +33,12 @@ class BlockBanner extends Module
 	{
 		$this->name = 'blockbanner';
 		$this->tab = 'front_office_features';
-		$this->version = '1.3.3';
+		$this->version = '1.3.4';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
 		$this->bootstrap = true;
-		parent::__construct();	
+		parent::__construct();
 
 		$this->displayName = $this->l('Banner block');
 		$this->description = $this->l('Displays a banner at the top of the shop.');
@@ -47,20 +47,20 @@ class BlockBanner extends Module
 
 	public function install()
 	{
-		return 
-			parent::install() && 
-			$this->registerHook('displayBanner') && 
-			$this->registerHook('displayHeader') && 
+		return
+			parent::install() &&
+			$this->registerHook('displayBanner') &&
+			$this->registerHook('displayHeader') &&
 			$this->registerHook('actionObjectLanguageAddAfter') &&
 			$this->installFixtures() &&
 			$this->disableDevice(Context::DEVICE_MOBILE);
 	}
-	
+
 	public function hookActionObjectLanguageAddAfter($params)
 	{
 		return $this->installFixture((int)$params['object']->id, Configuration::get('BLOCKBANNER_IMG', (int)Configuration::get('PS_LANG_DEFAULT')));
 	}
-	
+
 	protected function installFixtures()
 	{
 		$languages = Language::getLanguages(false);
@@ -69,7 +69,7 @@ class BlockBanner extends Module
 
 		return true;
 	}
-	
+
 	protected function installFixture($id_lang, $image = null)
 	{
 		$values['BLOCKBANNER_IMG'][(int)$id_lang] = $image;
@@ -177,7 +177,7 @@ class BlockBanner extends Module
 	{
 		return $this->postProcess().$this->renderForm();
 	}
-	
+
 	public function renderForm()
 	{
 		$fields_form = array(
@@ -200,7 +200,7 @@ class BlockBanner extends Module
 						'label' => $this->l('Banner Link'),
 						'name' => 'BLOCKBANNER_LINK',
 						'desc' => $this->l('Enter the link associated to your banner. When clicking on the banner, the link opens in the same window. If no link is entered, it redirects to the homepage.')
-					),			
+					),
 					array(
 						'type' => 'text',
 						'lang' => true,
@@ -235,7 +235,7 @@ class BlockBanner extends Module
 
 		return $helper->generateForm(array($fields_form));
 	}
-	
+
 	public function getConfigFieldsValues()
 	{
 		$languages = Language::getLanguages(false);
