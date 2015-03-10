@@ -29,7 +29,7 @@
 		<div class="col-lg-9">
 			{foreach from=$languages item=language}
 				{if $languages|count > 1}
-					<div class="translatable-field lang-{$language.id_lang}" {if $language.id_lang != $defaultFormLanguage} style="display:none"{/if}>
+					<div class="translatable-field lang-{$language.id_lang}" {if $language.id_lang != $defaultFormLanguage}style="display:none"{/if}>
 				{/if}
 				<div class="form-group">
 					<div class="col-lg-6">
