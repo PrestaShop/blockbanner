@@ -1,5 +1,5 @@
 {*
-* 2007-2014 PrestaShop
+* 2007-2015 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,7 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2014 PrestaShop SA
+*  @copyright  2007-2015 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
@@ -29,7 +29,7 @@
 		<div class="col-lg-9">
 			{foreach from=$languages item=language}
 				{if $languages|count > 1}
-					<div class="translatable-field lang-{$language.id_lang}" {if $language.id_lang != $defaultFormLanguage}style="display:none"{/if}>
+					<div class="translatable-field lang-{$language.id_lang}" {if $language.id_lang != $defaultFormLanguage} style="display:none"{/if}>
 				{/if}
 				<div class="form-group">
 					<div class="col-lg-6">
@@ -39,7 +39,7 @@
 							<input id="{$input.name}_{$language.id_lang}-name" type="text" class="disabled" name="filename" readonly />
 							<span class="input-group-btn">
 								<button id="{$input.name}_{$language.id_lang}-selectbutton" type="button" name="submitAddAttachments" class="btn btn-default">
-									<i class="icon-folder-open"></i> {l s='Choose a file'}
+									<i class="icon-folder-open"></i> {l s='Choose a file' mod='blockbanner'}
 								</button>
 							</span>
 						</div>
@@ -87,7 +87,7 @@
 				</p>
 			{/if}
 		</div>
-	{else}		
+	{else}
 		{$smarty.block.parent}
 	{/if}
 {/block}
