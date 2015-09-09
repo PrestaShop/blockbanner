@@ -33,7 +33,7 @@ class BlockBanner extends Module
 	{
 		$this->name = 'blockbanner';
 		$this->tab = 'front_office_features';
-		$this->version = '1.4.0';
+		$this->version = '2.0.0';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
@@ -42,7 +42,7 @@ class BlockBanner extends Module
 
 		$this->displayName = $this->l('Banner block');
 		$this->description = $this->l('Displays a banner at the top of the shop.');
-		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+		$this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
 	}
 
 	public function install()
@@ -97,8 +97,14 @@ class BlockBanner extends Module
 			if ($imgname && file_exists(_PS_MODULE_DIR_.$this->name.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$imgname))
 				$this->smarty->assign('banner_img', $this->context->link->protocol_content.Tools::getMediaServer($imgname).$this->_path.'img/'.$imgname);
 
+			$banner_link = Configuration::get('BLOCKBANNER_LINK', $this->context->language->id);
+			if (!$banner_link) {
+				// If link wasn't specified, use shop homepage
+				$banner_link = $this->context->link->getPageLink('index');
+			}
+
 			$this->smarty->assign(array(
-				'banner_link' => Configuration::get('BLOCKBANNER_LINK', $this->context->language->id),
+				'banner_link' => $banner_link,
 				'banner_desc' => Configuration::get('BLOCKBANNER_DESC', $this->context->language->id)
 			));
 		}
