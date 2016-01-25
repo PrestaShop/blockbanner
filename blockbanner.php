@@ -27,7 +27,9 @@
 if (!defined('_PS_VERSION_'))
 	exit;
 
-class BlockBanner extends Module
+use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
+
+class BlockBanner extends Module implements WidgetInterface
 {
 	public function __construct()
 	{
@@ -49,8 +51,7 @@ class BlockBanner extends Module
 	{
 		return
 			parent::install() &&
-			$this->registerHook('displayBanner') &&
-			$this->registerHook('displayHeader') &&
+			$this->registerHook('displayHome') &&
 			$this->registerHook('actionObjectLanguageAddAfter') &&
 			$this->installFixtures() &&
 			$this->disableDevice(Context::DEVICE_MOBILE);
@@ -88,43 +89,29 @@ class BlockBanner extends Module
 		return parent::uninstall();
 	}
 
-	public function hookDisplayTop($params)
+	public function renderWidget($hookName, array $params)
 	{
-		if (!$this->isCached('blockbanner.tpl', $this->getCacheId()))
-		{
-			$imgname = Configuration::get('BLOCKBANNER_IMG', $this->context->language->id);
+		$this->smarty->assign($this->getWidgetVariables($hookName, $params));
+		return $this->display(__FILE__, 'blockbanner.tpl');
+	}
 
-			if ($imgname && file_exists(_PS_MODULE_DIR_.$this->name.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$imgname))
-				$this->smarty->assign('banner_img', $this->context->link->protocol_content.Tools::getMediaServer($imgname).$this->_path.'img/'.$imgname);
+	public function getWidgetVariables($hookName, array $params)
+	{
+		$imgname = Configuration::get('BLOCKBANNER_IMG', $this->context->language->id);
 
-			$banner_link = Configuration::get('BLOCKBANNER_LINK', $this->context->language->id);
-			if (!$banner_link) {
-				// If link wasn't specified, use shop homepage
-				$banner_link = $this->context->link->getPageLink('index');
-			}
+		if ($imgname && file_exists(_PS_MODULE_DIR_.$this->name.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$imgname))
+			$this->smarty->assign('banner_img', $this->context->link->protocol_content.Tools::getMediaServer($imgname).$this->_path.'img/'.$imgname);
 
-			$this->smarty->assign(array(
-				'banner_link' => $banner_link,
-				'banner_desc' => Configuration::get('BLOCKBANNER_DESC', $this->context->language->id)
-			));
+		$banner_link = Configuration::get('BLOCKBANNER_LINK', $this->context->language->id);
+		if (!$banner_link) {
+			// If link wasn't specified, use shop homepage
+			$banner_link = $this->context->link->getPageLink('index');
 		}
 
-		return $this->display(__FILE__, 'blockbanner.tpl', $this->getCacheId());
-	}
-
-	public function hookDisplayBanner($params)
-	{
-		return $this->hookDisplayTop($params);
-	}
-
-	public function hookDisplayFooter($params)
-	{
-		return $this->hookDisplayTop($params);
-	}
-
-	public function hookDisplayHeader($params)
-	{
-		$this->context->controller->addCSS($this->_path.'blockbanner.css', 'all');
+		return [
+			'banner_link' => $banner_link,
+			'banner_desc' => Configuration::get('BLOCKBANNER_DESC', $this->context->language->id)
+		];
 	}
 
 	public function postProcess()
